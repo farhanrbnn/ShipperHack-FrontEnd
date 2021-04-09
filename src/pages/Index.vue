@@ -12,6 +12,7 @@
 
 <script>
 import DataService from '../boot/axios'
+
 export default {
   name: 'PageIndex',
   created() {

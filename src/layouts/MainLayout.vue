@@ -66,7 +66,7 @@ const linksData = [
 
 export default {
   name: 'MainLayout',
-  data () {
+  data() {
     return {
 
     }
