@@ -14,14 +14,3 @@ export default {
 
 }
 </script>
-
-<style lang="scss">
-#main-row {
-  padding-top: 50px;
-}
-
-.title {
-  font-size: 24px;
-  font-weight: bold; 
-}
-</style>

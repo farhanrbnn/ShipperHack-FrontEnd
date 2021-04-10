@@ -1,0 +1,35 @@
+img {
+  margin-top: 13px;
+}
+
+.dropdown {
+  padding-left: 50px;
+}
+
+.item {
+  color: white;
+}
+
+.top-header {
+  height: 80px;
+  background-color: $light-grey-2;
+}
+
+.fit {
+  background-color: $dark;
+  color: white;
+  font-size: 18px;
+}
+
+.router-link-active > .item-main {
+	background-color: #404040;
+	color: white;
+}
+
+.router-link-exact-active  > .item-main {
+	background-color: $active-item;
+	color: white;
+}
+.router-link-active > .item {
+	background-color: $active-item;
+}

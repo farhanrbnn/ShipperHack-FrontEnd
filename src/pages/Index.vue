@@ -102,36 +102,3 @@ export default {
   }
 };
 </script>
-<style lang="scss">
-h4 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.q-pt-none {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.no-active {
-  font-size: 18px;
-  margin-top: 20px;
-}
-
-.title {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-#main-row {
-  padding-top: 50px;
-}
-
-.col-12 {
-  padding-left: 80px;
-  padding-right: 80px;
-}
-
-.active {
-  margin-top: 20px;
-  background-color: #efefef;
-}
-</style>

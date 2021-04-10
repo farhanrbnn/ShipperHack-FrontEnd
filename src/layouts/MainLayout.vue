@@ -24,42 +24,30 @@
                 icon="perm_identity"
                 label="Put List">
                 <q-card class="bg-grey-9">
-                  <div class="dropdown">
+                  <div>
                     <router-link to="/">
-                      <q-item class="item">Active Job</q-item>
+                      <q-item class="item-main dropdown">Active Job</q-item>
                     </router-link>
                     <router-link to="/assigned-job">
-                      <q-item class="item">Assigned Job</q-item>
+                      <q-item class="item dropdown">Assigned Job</q-item>
                     </router-link>
                   </div>
-                  
-
                 </q-card>
               </q-expansion-item>
               <q-expansion-item
                 icon="assessment"
                 label="Report">
                 <q-card class="bg-grey-9">
-                  <div class="dropdown">
+                  <div>
                     <router-link to="/capacity">
-                      <q-item class="item">Capacity</q-item>
+                      <q-item class="item dropdown">Capacity</q-item>
                     </router-link>
                     <router-link to="/statistics">
-                      <q-item class="item">Statistics</q-item>  
+                      <q-item class="item dropdown">Statistics</q-item>  
                     </router-link>
                   </div>
-                  
               </q-card>
             </q-expansion-item>
-            <!-- <q-item :key="index" clickable :active="menuItem.label === 'Outbox'" v-ripple>
-                <q-item-section avatar>
-                  <q-icon :name="menuItem.icon" />
-                </q-item-section>
-                <q-item-section>
-                  {{ menuItem.label }}
-                </q-item-section>
-              </q-item> -->
-            <!-- <q-separator :key="'sep' + index"  v-if="menuItem.separator" /> -->
           </template>
         </q-list>
       </q-scroll-area>
@@ -74,37 +62,5 @@
 <script>
 export default {
   name: "MainLayout"
-  // data() {
-  //   return {
-  //     drawer: false,
-  //     menuList
-
-  //   }
-  // }
 };
 </script>
-<style lang="scss">
-
-img {
-  margin-top: 13px;
-}
-
-.dropdown {
-  margin-left: 50px;
-}
-
-.item {
-  color: white;
-}
-
-.top-header {
-  height: 80px;
-  background-color: #fafafa;
-}
-
-.fit {
-  background-color: #404040;
-  color: white;
-  font-size: 18px;
-}
-</style>
