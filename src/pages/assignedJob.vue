@@ -5,12 +5,10 @@
        <p class="title">Assigned Jobs</p>
        <q-separator color="#EFEFEF" inset />
        <q-table
-          :data="data"
           :columns="columns"
           row-key="name"
           class="assigned-table"
         />
-
      </div>
   	</div>
 	</q-page>

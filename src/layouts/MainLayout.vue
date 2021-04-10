@@ -15,7 +15,9 @@
 
             <template>
               <div class="flex flex-center">
-                <img src="../assets/Logo.png">
+                <router-link to="/">
+                  <img src="../assets/Logo.png">
+                </router-link>
                 <h5 class="flex flex-center">Warehouse NBWC</h5>
               </div>
               <q-expansion-item
@@ -35,7 +37,7 @@
                 </q-card>
               </q-expansion-item>
               <q-expansion-item
-                icon="perm_identity"
+                icon="assessment"
                 label="Report">
                 <q-card class="bg-grey-9">
                   <div class="dropdown">

@@ -19,7 +19,7 @@
               </div>
             </q-card-section>
           </q-card>
-          <q-table :data="data" :columns="columns" row-key="name" />
+          <q-table :columns="columns" row-key="name" />
         </div>
         <!-- <div class="no-active">
          <p>No Active Data</p>
