@@ -22,10 +22,16 @@
               {{ props.row.location }}
             </q-td>
             <q-td key="status" :props="props">
-              {{ props.row.status }}
+              <div v-if="props.row.status === true" class="status-label label-grey">
+                <p class="status-label__text">Dispatched</p>
+              </div>
+              <div v-if="props.row.status === false" class="status-label label-blue">
+                <p class="status-label__text">Stored</p>
+              </div>
             </q-td>
             <q-td key="action" :props="props">
-              <q-btn color="primary" label="finalized" />
+              <q-btn v-if="props.row.status === true" color="primary" label="finalized" />
+              <q-btn v-if="props.row.status === false" flat color="primary" disable label="finalized" />
             </q-td>
           </q-tr>
         </template>
@@ -49,16 +55,32 @@ export default {
         { name: 'status', align: 'center',label: 'Status', field: 'status' },
         { name: 'action', align: 'center', label: 'Action', field: 'action' }
       ],
-      data: [
-      {sku:'SKU001', stored: '10/04/2021', location: 'AIAssignXX01', status: 'Dispatched', action: 'finalized'},
-      {sku:'SKU002', stored: '10/04/2021', location: 'AIAssignXX02', status: 'Dispatched', action: 'finalized'}
-      ]
+      data: []
 		}
 	},
   created () {
-    DataService.get()
+    DataService.get('/inbound')
     .then((res) => {
-      console.log(res)
+      const apiData = res.data
+      const dataTable = []
+
+      for(let i = 0; i < apiData.length; i++) {
+        const timestamp = new Date(apiData[i].received_timestamp)
+
+        const realDate = timestamp.getDate() + '/' + (timestamp.getMonth() + 1) + '/' + timestamp.getFullYear()
+
+        const newData = {
+          sku: apiData[i].serial,
+          stored: realDate,
+          location: apiData[i].location_bin_id,
+          status: apiData[i].is_done,
+          action:'finalized'
+        }
+         dataTable.push(newData)
+      }
+
+      this.data = dataTable
+
     })
     .catch((err) => {
       console.log(err)

@@ -20,7 +20,7 @@ export default {
 		}
 	},
 	created () {
-		DataService.get()
+		DataService.get('/category')
 		.then((res) => {
 			console.log(res)
 		})

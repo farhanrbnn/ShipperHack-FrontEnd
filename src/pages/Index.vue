@@ -10,7 +10,7 @@
               <div class="row">
                 <div class="col-3">
                   <p>Date</p>
-                  <h4>10/04/21</h4>
+                  <h4>{{today}}</h4>
                 </div>
                 <div class="col-3">
                   <p>P.O.ID</p>
@@ -38,9 +38,15 @@
                   {{ props.row.location }}
                 </q-td>
                 <q-td key="status" :props="props">
-                  <div class="status-label label-green">
+                  <div v-if="props.row.status.automated === true" class="status-label label-green">
+                    <p class="status-label__text"><q-icon name="fa fa-magic" />Assigned</p>
+                  </div>
+                  <div v-if="props.row.status.normal === true" class="status-label label-green">
                     <p class="status-label__text"><q-icon name="fa fa-check" />Assigned</p>
                   </div>
+                  <div v-if="props.row.status.normal === false" class="status-label label-grey">
+                    <p class="status-label__text">Pending</p>
+                </div>
                 </q-td>
                 <q-td key="action" :props="props">
                   <q-btn color="primary" label="edit" />
@@ -67,6 +73,7 @@ export default {
   components: {},
   data() {
     return {
+      today: null,
       columns: [
         {
           name: "sku",
@@ -109,17 +116,46 @@ export default {
           field: "action",
         }
       ],
-      data: [
-      {sku:'SKU0001',goods:'25',exp:'27/03/5000',category:'A',location:'PendingXX01',status:'assigned', action:'edit'}
-      ]
+      data: []
     }
   },
-  created() {
-    DataService.get()
-      .then(res => {
-        console.log(res);
+ created() {
+    const dateNow = new Date()
+    const todayDate = dateNow.getDate() + '/' + (dateNow.getMonth() + 1) + '/' + dateNow.getFullYear()
+
+    this.today = todayDate
+    
+    DataService.get('/inbound')
+      .then((res) => {
+        const apiData = res.data
+
+        const dataTable = []
+
+        for(let i = 0; i < apiData.length; i++) {
+          const timestamp = new Date(apiData[i].exp_date)
+
+          const realDate = timestamp.getDate() + '/' + (timestamp.getMonth() + 1) + '/' + timestamp.getFullYear()
+
+          const newData = { 
+            sku:apiData[i].serial,
+            goods:apiData[i].good_qty,
+            exp:realDate,
+            location:apiData[i].location_bin_id,
+            category:apiData[i].category_id,
+            status: {
+              normal: apiData[i].is_dispatch,
+              automated: apiData[i].is_automated
+            }
+          }
+
+          dataTable.push(newData)
+
+        }
+
+        this.data = dataTable
+        
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
