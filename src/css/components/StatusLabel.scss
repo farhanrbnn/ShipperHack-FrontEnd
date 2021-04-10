@@ -1,0 +1,29 @@
+.status-label {
+  border-radius: 4px;
+  display: inline-block;
+
+  i {
+    margin-right: 10px;
+  }
+
+  &__text {
+    font-size: 18px;
+    margin: 0;
+    padding: 4px 16px;
+  }
+}
+
+.label-green {
+  background-color: $status-green-bg;
+  color: $status-green;
+}
+
+.label-blue {
+  background-color: $status-blue-bg;
+  color: $status-blue;
+}
+
+.label-grey {
+  background-color: $grey;
+  color: $dark-grey;
+}

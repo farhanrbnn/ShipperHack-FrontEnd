@@ -1,4 +1,7 @@
 // app global css in SCSS form
+@import "./quasar.variables.scss";
 @import "./mixin";
+
+@import "./components/StatusLabel.scss";
 
 @import "./pages/Error404.scss";
