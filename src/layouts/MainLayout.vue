@@ -1,7 +1,6 @@
 <!-- HEADER APP -->
 <template>
   <q-layout view="lHh Lpr lFf">
-<<<<<<< HEAD
     <q-header class="top-header">
     </q-header>
      <q-drawer 
@@ -32,32 +31,7 @@
                     </router-link>
                   </div>
                   
-                 <!--  <q-card-section>
-=======
-    <q-header class="top-header"> </q-header>
-    <q-drawer
-      show-if-above
-      :width="250"
-      :breakpoint="500"
-      bordered
-      content-class="bg-grey-3"
-    >
-      <q-scroll-area class="fit">
-        <q-list>
-          <template>
-            <div class="flex flex-center">
-              <img src="../assets/Logo.png" />
-              <h5 class="flex flex-center">Warehouse NBWC</h5>
-            </div>
-            <q-expansion-item icon="fa fa-box-open" label="Put List">
-              <q-card class="bg-grey-9">
-                <!--  <q-card-section>
->>>>>>> 87c8641101dd241344d4ce7ce2ee516239d3d19c
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-                    commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-                    eveniet doloribus ullam aliquid.
-                  </q-card-section> -->
-<<<<<<< HEAD
+
                 </q-card>
               </q-expansion-item>
               <q-expansion-item
@@ -73,18 +47,6 @@
                     </router-link>
                   </div>
                   
-                 <!--  <q-card-section>
-=======
-              </q-card>
-            </q-expansion-item>
-            <q-expansion-item icon="fa fa-chart-bar" label="Report">
-              <q-card class="bg-grey-9">
-                <!--  <q-card-section>
->>>>>>> 87c8641101dd241344d4ce7ce2ee516239d3d19c
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-                    commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-                    eveniet doloribus ullam aliquid.
-                  </q-card-section> -->
               </q-card>
             </q-expansion-item>
             <!-- <q-item :key="index" clickable :active="menuItem.label === 'Outbox'" v-ripple>
