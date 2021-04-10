@@ -10,7 +10,25 @@
 </template>
 
 <script>
+import DataService from "../boot/axios";
+
 export default {
+	name: 'statistics',
+	data () {
+		return {
+
+		}
+	},
+	created () {
+		DataService.get()
+		.then((res) => {
+			console.log(res)
+		})
+		.catch((err) => {
+			console.log(err)
+		})
+
+	}
 
 }
 </script>

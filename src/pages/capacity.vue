@@ -10,7 +10,23 @@
 </template>
 
 <script>
-export default {
+import DataService from "../boot/axios";
 
+export default {
+	name: 'capacity',
+	data () {
+		return {
+
+		}
+	},
+	created () {
+		DataService.get()
+		.then((res) => {
+			console.log(res)
+		})
+		.catch((err) => {
+			console.log(err)
+		})
+	}
 }
 </script>

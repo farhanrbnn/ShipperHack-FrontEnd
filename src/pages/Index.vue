@@ -19,7 +19,35 @@
               </div>
             </q-card-section>
           </q-card>
-          <q-table :columns="columns" row-key="name" />
+          <q-table :columns="columns" :data="data" row-key="name">
+            <template v-slot:body="props">
+              <q-tr :props="props">
+                <q-td key="sku" :props="props">
+                  {{ props.row.sku }}
+                </q-td>
+                <q-td key="goods" :props="props">
+                  {{ props.row.goods }}
+                </q-td>
+                <q-td key="exp" :props="props">
+                  {{ props.row.exp }}
+                </q-td>
+                <q-td key="category" :props="props">
+                  {{ props.row.category }}
+                </q-td>
+                <q-td key="location" :props="props">
+                  {{ props.row.location }}
+                </q-td>
+                <q-td key="status" :props="props">
+                  <div class="status-label label-green">
+                    <p class="status-label__text"><q-icon name="fa fa-check" />Assigned</p>
+                  </div>
+                </q-td>
+                <q-td key="action" :props="props">
+                  <q-btn color="primary" label="edit" />
+                </q-td>
+              </q-tr>
+            </template>
+          </q-table>
         </div>
         <!-- <div class="no-active">
          <p>No Active Data</p>
@@ -41,55 +69,50 @@ export default {
     return {
       columns: [
         {
-          name: "name",
-          required: true,
-          align: "left"
-        },
-        {
-          name: "calories",
+          name: "sku",
           align: "center",
-          label: "Category",
-          field: "calories",
-          sortable: true
+          label: "SKU No.",
+          field: "sku"
         },
         {
-          name: "fat",
+          name: "goods",
           align: "center",
           label: "Goods Qty.",
-          field: "fat",
-          sortable: true
+          field: "goods"
         },
-        { name: "carbs", align: "center", label: "Exp. Date", field: "carbs" },
+        { name: "exp", 
+          align: "center", 
+          label: "Exp. Date", 
+          field: "exp" },
         {
-          name: "protein",
+          name: "category",
           align: "center",
           label: "Category",
-          field: "protein"
+          field: "category"
         },
         {
-          name: "sodium",
+          name: "location",
           align: "center",
           label: "Location Bin",
-          field: "sodium"
+          field: "location"
         },
         {
-          name: "calcium",
+          name: "status",
           align: "center",
           label: "Status",
-          field: "calcium",
-          sortable: true,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10)
+          field: "status",
         },
         {
-          name: "iron",
+          name: "action",
           align: "center",
           label: "Action",
-          field: "iron",
-          sortable: true,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10)
+          field: "action",
         }
+      ],
+      data: [
+      {sku:'SKU0001',goods:'25',exp:'27/03/5000',category:'A',location:'PendingXX01',status:'assigned', action:'edit'}
       ]
-    };
+    }
   },
   created() {
     DataService.get()
