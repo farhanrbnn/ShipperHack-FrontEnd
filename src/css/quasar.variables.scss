@@ -12,17 +12,27 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary   : #1976D2;
-$secondary : #26A69A;
-$accent    : #9C27B0;
+$primary: #00a2d8;
+$secondary: #f04a41;
+$accent: #984541;
 
-$dark      : #1D1D1D;
+$dark: #404040;
 
-$positive  : #21BA45;
-$negative  : #C10015;
-$info      : #31CCEC;
-$warning   : #F2C037;
+$positive: #21ba45;
+$negative: #c10015;
+$info: #31ccec;
+$warning: #f2c037;
 
-// drawer
+// Shipper colors
 
-$background-drawer : #404040;
+$grey: #e2e3e5;
+$dark-grey: #383d41;
+
+$light-grey-1: #efefef;
+$light-grey-2: #fafafa;
+
+$status-green: #155724;
+$status-green-bg: #d4edda;
+
+$status-blue: #004085;
+$status-blue-bg: #cce5ff;
