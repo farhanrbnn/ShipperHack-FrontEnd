@@ -22,6 +22,15 @@
                 icon="perm_identity"
                 label="Put List">
                 <q-card class="bg-grey-9">
+                  <div class="dropdown">
+                    <router-link to="/">
+                      <q-item class="item">Active Job</q-item>
+                    </router-link>
+                    <router-link to="/assigned-job">
+                      <q-item class="item">Assigned Job</q-item>
+                    </router-link>
+                  </div>
+                  
                  <!--  <q-card-section>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
                     commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
@@ -33,6 +42,15 @@
                 icon="perm_identity"
                 label="Report">
                 <q-card class="bg-grey-9">
+                  <div class="dropdown">
+                    <router-link to="/capacity">
+                      <q-item class="item">Capacity</q-item>
+                    </router-link>
+                    <router-link to="/statistics">
+                      <q-item class="item">Statistics</q-item>  
+                    </router-link>
+                  </div>
+                  
                  <!--  <q-card-section>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
                     commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
@@ -74,8 +92,17 @@ export default {
 }
 </script>
 <style lang="scss">
+
 img {
   margin-top: 13px;
+}
+
+.dropdown {
+  margin-left: 50px;
+}
+
+.item {
+  color: white;
 }
 
 .top-header {
