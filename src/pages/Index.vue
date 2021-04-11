@@ -35,7 +35,7 @@
                   {{ props.row.category }}
                 </q-td>
                 <q-td key="location" :props="props">
-                  {{ props.row.location }}
+                  <q-select outlined v-model="model" :options="props.row.location"/>
                 </q-td>
                 <q-td key="status" :props="props">
                   <div v-if="props.row.status.automated === true" class="status-label label-green">
@@ -74,28 +74,34 @@ export default {
   data() {
     return {
       today: null,
+      model: null,
       columns: [
         {
           name: "sku",
           align: "center",
           label: "SKU No.",
-          field: "sku"
+          field: "sku",
+          style: 'width: 100px'
         },
         {
           name: "goods",
           align: "center",
           label: "Goods Qty.",
-          field: "goods"
+          field: "goods",
+          style: 'width: 30px'
         },
         { name: "exp", 
           align: "center", 
           label: "Exp. Date", 
-          field: "exp" },
+          field: "exp",
+          style: 'width: 50px' 
+        },
         {
           name: "category",
           align: "center",
           label: "Category",
-          field: "category"
+          field: "category",
+          style: 'width: 80px'
         },
         {
           name: "location",
@@ -119,17 +125,47 @@ export default {
       data: []
     }
   },
- created() {
+ async created() {
     const dateNow = new Date()
     const todayDate = dateNow.getDate() + '/' + (dateNow.getMonth() + 1) + '/' + dateNow.getFullYear()
 
     this.today = todayDate
-    
-    DataService.get('/inbound')
+
+    const dataTable = []
+    const arrayLocation = []
+
+    await DataService.get('/location-bin')
+    .then((res) => {
+      const apiData = res.data
+
+      for(let i = 0; i < apiData.length; i++) {
+        arrayLocation.push(apiData[i].name)
+
+      }
+
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+    const categoryArray = []
+
+    await DataService.get('/category')
+    .then((res) => {
+      const apiData = res.data
+
+      for(let i = 0; i < apiData.length; i++) {
+        categoryArray.push(apiData[i].name)
+      }
+
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+    await DataService.get('/inbound')
       .then((res) => {
         const apiData = res.data
-
-        const dataTable = []
 
         for(let i = 0; i < apiData.length; i++) {
           const timestamp = new Date(apiData[i].exp_date)
@@ -140,8 +176,8 @@ export default {
             sku:apiData[i].serial,
             goods:apiData[i].good_qty,
             exp:realDate,
-            location:apiData[i].location_bin_id,
-            category:apiData[i].category_id,
+            category:categoryArray[i],
+            location: arrayLocation,
             status: {
               normal: apiData[i].is_dispatch,
               automated: apiData[i].is_automated
@@ -150,14 +186,15 @@ export default {
 
           dataTable.push(newData)
 
-        }
-
-        this.data = dataTable
+        }        
         
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
+
+      this.data = dataTable
+      // console.log(dataTable)
   }
 };
 </script>

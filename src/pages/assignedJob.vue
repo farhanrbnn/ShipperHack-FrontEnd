@@ -58,8 +58,24 @@ export default {
       data: []
 		}
 	},
-  created () {
-    DataService.get('/inbound')
+  async created () {
+
+    const arrayLocation = []
+
+    await DataService.get('/location-bin')
+    .then((res) => {
+      const apiData = res.data
+
+      for(let i = 0; i < apiData.length; i++) {
+        arrayLocation.push(apiData[i].name)
+      }
+
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+    await DataService.get('/inbound')
     .then((res) => {
       const apiData = res.data
       const dataTable = []
@@ -72,7 +88,7 @@ export default {
         const newData = {
           sku: apiData[i].serial,
           stored: realDate,
-          location: apiData[i].location_bin_id,
+          location: arrayLocation[i],
           status: apiData[i].is_done,
           action:'finalized'
         }
@@ -85,6 +101,7 @@ export default {
     .catch((err) => {
       console.log(err)
     })
+
   }
 
 }
