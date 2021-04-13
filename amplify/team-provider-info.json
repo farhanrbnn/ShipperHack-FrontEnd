@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-shipperhackfrontend-dev-05358-authRole",
+      "UnauthRoleArn": "arn:aws:iam::450542050585:role/amplify-shipperhackfrontend-dev-05358-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::450542050585:role/amplify-shipperhackfrontend-dev-05358-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-shipperhackfrontend-dev-05358-deployment",
+      "UnauthRoleName": "amplify-shipperhackfrontend-dev-05358-unauthRole",
+      "StackName": "amplify-shipperhackfrontend-dev-05358",
+      "StackId": "arn:aws:cloudformation:us-east-1:450542050585:stack/amplify-shipperhackfrontend-dev-05358/91ce7600-995c-11eb-8766-12872187ca4d",
+      "AmplifyAppId": "d1de5zilkwfwci"
+    }
+  }
+}

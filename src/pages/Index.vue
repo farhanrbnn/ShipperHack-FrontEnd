@@ -35,16 +35,17 @@
                   {{ props.row.category }}
                 </q-td>
                 <q-td key="location" :props="props">
-                  <q-select outlined v-model="model" :options="props.row.location"/>
+                  {{props.row.location}}
+                  <!-- <q-select outlined v-model="model" :options="props.row.location"/> -->
                 </q-td>
                 <q-td key="status" :props="props">
-                  <div v-if="props.row.status.automated === true" class="status-label label-green">
+                  <!-- <div v-if="props.row.status.automated === true" class="status-label label-green">
                     <p class="status-label__text"><q-icon name="fa fa-magic" />Assigned</p>
-                  </div>
-                  <div v-if="props.row.status.normal === true" class="status-label label-green">
+                  </div> -->
+                  <div v-if="props.row.status === true" class="status-label label-green">
                     <p class="status-label__text"><q-icon name="fa fa-check" />Assigned</p>
                   </div>
-                  <div v-if="props.row.status.normal === false" class="status-label label-grey">
+                  <div v-if="props.row.status === false" class="status-label label-grey">
                     <p class="status-label__text">Pending</p>
                 </div>
                 </q-td>
@@ -126,46 +127,48 @@ export default {
     }
   },
  async created() {
-    const dateNow = new Date()
-    const todayDate = dateNow.getDate() + '/' + (dateNow.getMonth() + 1) + '/' + dateNow.getFullYear()
+    // const dateNow = new Date()
+    // const todayDate = dateNow.getDate() + '/' + (dateNow.getMonth() + 1) + '/' + dateNow.getFullYear()
 
-    this.today = todayDate
+    // this.today = todayDate
 
-    const dataTable = []
-    const arrayLocation = []
+    // const dataTable = []
+    // const arrayLocation = []
 
-    await DataService.get('/location-bin')
-    .then((res) => {
-      const apiData = res.data
+    // await DataService.get('/location-bin')
+    // .then((res) => {
+    //   const apiData = res.data
 
-      for(let i = 0; i < apiData.length; i++) {
-        arrayLocation.push(apiData[i].name)
+    //   for(let i = 0; i < apiData.length; i++) {
+    //     arrayLocation.push(apiData[i].name)
 
-      }
+    //   }
 
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    // })
+    // .catch((err) => {
+    //   console.log(err)
+    // })
 
-    const categoryArray = []
+    // const categoryArray = []
 
-    await DataService.get('/category')
-    .then((res) => {
-      const apiData = res.data
+    // await DataService.get('/category')
+    // .then((res) => {
+    //   const apiData = res.data
 
-      for(let i = 0; i < apiData.length; i++) {
-        categoryArray.push(apiData[i].name)
-      }
+    //   for(let i = 0; i < apiData.length; i++) {
+    //     categoryArray.push(apiData[i].name)
+    //   }
 
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    // })
+    // .catch((err) => {
+    //   console.log(err)
+    // })
 
     await DataService.get('/inbound')
       .then((res) => {
-        const apiData = res.data
+        const apiData = res.data.data
+
+        const dataTable = []
 
         for(let i = 0; i < apiData.length; i++) {
           const timestamp = new Date(apiData[i].exp_date)
@@ -173,27 +176,27 @@ export default {
           const realDate = timestamp.getDate() + '/' + (timestamp.getMonth() + 1) + '/' + timestamp.getFullYear()
 
           const newData = { 
-            sku:apiData[i].serial,
+            sku:apiData[i].mcode,
             goods:apiData[i].good_qty,
             exp:realDate,
-            category:categoryArray[i],
-            location: arrayLocation,
-            status: {
-              normal: apiData[i].is_dispatch,
-              automated: apiData[i].is_automated
-            }
+            category:apiData[i].category_id,
+            location:apiData[i].location_bin_id ,
+            status:apiData[i].is_dispatch
           }
-
           dataTable.push(newData)
+        }  
+        console.log(dataTable)  
 
-        }        
+        this.data = dataTable
+          // console.log(dataTable)
+
         
       })
       .catch((err) => {
         console.log(err)
       })
 
-      this.data = dataTable
+      // this.data = dataTable
       // console.log(dataTable)
   }
 };
