@@ -185,7 +185,6 @@ export default {
           }
           dataTable.push(newData)
         }  
-        console.log(dataTable)  
 
         this.data = dataTable
           // console.log(dataTable)

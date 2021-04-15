@@ -60,25 +60,26 @@ export default {
 	},
   async created () {
 
-    const arrayLocation = []
+    // const arrayLocation = []
 
-    await DataService.get('/location-bin')
-    .then((res) => {
-      const apiData = res.data
+    // await DataService.get('/location-bin')
+    // .then((res) => {
+    //   const apiData = res.data
 
-      for(let i = 0; i < apiData.length; i++) {
-        arrayLocation.push(apiData[i].name)
-      }
+    //   for(let i = 0; i < apiData.length; i++) {
+    //     arrayLocation.push(apiData[i].name)
+    //   }
 
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    // })
+    // .catch((err) => {
+    //   console.log(err)
+    // })
 
     await DataService.get('/inbound')
     .then((res) => {
-      const apiData = res.data
+      const apiData = res.data.data
       const dataTable = []
+
 
       for(let i = 0; i < apiData.length; i++) {
         const timestamp = new Date(apiData[i].received_timestamp)
