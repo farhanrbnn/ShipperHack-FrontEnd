@@ -1,7 +1,7 @@
 import DataService from "../boot/axios";
 
 const state = {
-	inbound: []
+	inbound: null
 
 }
 
@@ -13,10 +13,11 @@ const mutations = {
 }
 
 const actions = {
-	consumeApi: ({commit}) => {
+	consumeApi: (state) => {
 		DataService.get('/')
 		.then((res) => {
-			commit('setInboundData', res.data.data)
+			state.inbound = res.data.data
+			// commit('setInboundData', res.data.data)
 		})
 		.catch((err) => {
 			console.log(err)

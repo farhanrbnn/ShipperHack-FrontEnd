@@ -19,7 +19,7 @@
               </div>
             </q-card-section>
           </q-card>
-          <q-table :columns="columns" :data="data" row-key="name">
+          <q-table :columns="columns" :data="data" row-key="name" scope="row">
             <template v-slot:body="props">
               <q-tr :props="props">
                 <q-td key="sku" :props="props">
@@ -49,8 +49,8 @@
                     <p class="status-label__text">Pending</p>
                 </div>
                 </q-td>
-                <q-td key="action" :props="props">
-                  <q-btn color="primary" label="edit" />
+                <q-td key="action">
+                  <q-btn color="primary" :props="props" v-on:click="assignBtn(props)" label="edit" />
                 </q-td>
               </q-tr>
             </template>
@@ -167,6 +167,7 @@ export default {
     await DataService.get('/inbound')
       .then((res) => {
         const apiData = res.data.data
+        // console.log(res.data.data)
 
         const dataTable = []
 
@@ -176,6 +177,7 @@ export default {
           const realDate = timestamp.getDate() + '/' + (timestamp.getMonth() + 1) + '/' + timestamp.getFullYear()
 
           const newData = { 
+            id:apiData[i]._id,
             sku:apiData[i].mcode,
             goods:apiData[i].good_qty,
             exp:realDate,
@@ -187,6 +189,7 @@ export default {
         }  
 
         this.data = dataTable
+        console.log(dataTable)
           // console.log(dataTable)
 
         
@@ -197,6 +200,33 @@ export default {
 
       // this.data = dataTable
       // console.log(dataTable)
+  },
+  methods: {
+    assignBtn (props) {
+     const status = props.row.status
+     
+     if(!status) {
+      const data = props.row
+      data.status = true
+
+      const updateData = {
+        id: data.id,
+        status: data.status
+      }
+
+      // console.log(updateData)
+
+       DataService.put('/inbound/update', updateData)
+      .then((res) => {
+        // console.log('oiiiiiiiiii')
+        console.log('update at', data.id)
+      })
+      .catch((err) => {
+        alert('something went wrong')
+      })
+     }
+     
+    }
   }
 };
 </script>
