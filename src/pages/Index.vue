@@ -164,6 +164,14 @@ export default {
     //   console.log(err)
     // })
 
+    await DataService.get('/locationbin')
+    .then((res) => {
+      console.log(res.data.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
     await DataService.get('/inbound')
       .then((res) => {
         const apiData = res.data.data
